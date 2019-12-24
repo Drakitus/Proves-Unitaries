@@ -7,15 +7,15 @@ final public class HealthCardID {
     private final String personalID;
 
     public HealthCardID(String code) {
-        Objects.requireNonNull(code, "The personalID cannot be NULL");
+        Objects.requireNonNull(code, "HealthCardID cannot be NULL");
 
-        if (code.isEmpty()) throw new IllegalArgumentException("PersonalId cannot be EMPTY");
-        if (code.isBlank()) throw new IllegalArgumentException("PersonalID cannot be WhiteSpaces");
-        if (!isValidHealthCardID(code)) throw new IllegalArgumentException("PersonalID has to be a String of numbers");
+        if (code.isEmpty()) throw new IllegalArgumentException("HealthCardID cannot be Empty");
+        if (code.isBlank()) throw new IllegalArgumentException("HealthCardID cannot be WhiteSpaces");
+        if (!isValidHealthCardID(code)) throw new IllegalArgumentException("HealthCardID has to be a String of numbers");
         
         this.personalID = code;
     }
-    private Boolean isValidHealthCardID(String personalID){return personalID.matches("[0-6]+");}
+    private Boolean isValidHealthCardID(String personalID){return personalID.matches("[0-9]+");}
     public String getPersonalID() { return personalID; }
 
     @Override

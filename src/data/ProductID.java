@@ -7,16 +7,25 @@ final public class ProductID {
     private final String prodUPC;
 
     public ProductID(String prodUPC) {
-        Objects.requireNonNull(prodUPC, "The productID cannot be NULL");
+        Objects.requireNonNull(prodUPC, "ProductID cannot be NULL");
 
-        if (prodUPC.isEmpty()) throw new IllegalArgumentException("ProductId cannot be EMPTY");
+        if (prodUPC.isEmpty()) throw new IllegalArgumentException("ProductID cannot be Empty");
         if (prodUPC.isBlank()) throw new IllegalArgumentException("ProductID cannot be WhiteSpaces");
         if (!isValidHealthCardID(prodUPC)) throw new IllegalArgumentException("ProductID has to be a String of numbers");
+
+        if(!CorrectFormat(prodUPC)){
+            throw new IllegalArgumentException("Invalid ProductID");
+        }
 
         this.prodUPC = prodUPC;
 
     }
-    private Boolean isValidHealthCardID(String prodUPC){return prodUPC.matches("[0-12]+");}
+    private boolean CorrectFormat(String prodUPC){
+        if (prodUPC.length() == 12)
+            return true;
+        return false;
+    }
+    private Boolean isValidHealthCardID(String prodUPC){return prodUPC.matches("[0-9]+");}
     public String getProdUPC() { return prodUPC; }
 
     @Override
