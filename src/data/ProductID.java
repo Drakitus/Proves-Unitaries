@@ -21,9 +21,7 @@ final public class ProductID {
 
     }
     private boolean CorrectFormat(String prodUPC){
-        if (prodUPC.length() == 12)
-            return true;
-        return false;
+        return prodUPC.length() == 12;
     }
     private Boolean isValidHealthCardID(String prodUPC){return prodUPC.matches("[0-9]+");}
     public String getProdUPC() { return prodUPC; }

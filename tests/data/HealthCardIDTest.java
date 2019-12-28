@@ -1,5 +1,6 @@
 package data;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HealthCardIDTest {
 
+    private static HealthCardID hc;
+    @BeforeAll
+    public static void setUp(){
+        hc = new HealthCardID("ABCD123456789012");
+    }
     @Test
     @DisplayName("No accepta null")
     public void NullThrowsExceptionTest(){
@@ -36,10 +42,9 @@ class HealthCardIDTest {
         assertEquals("HealthCardID cannot be WhiteSpaces", exception.getMessage());
     }
     @Test
-    @DisplayName("Creació d'un HealthCardID amb dades correctes")
-    public void addCorrectDataTest() {
-        HealthCardID heathCard = new HealthCardID("1234567890");
-        assertEquals("1234567890", heathCard.getPersonalID());
+    @DisplayName("Correcta HealthCardID del pacient")
+    public void CorrectHealthCardTest(){
+        assertEquals(new HealthCardID("ABCD123456789012"),hc);
     }
 
 }

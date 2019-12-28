@@ -7,11 +7,12 @@ public class PatientContr {
 
     private final BigDecimal contribution;
 
-    public PatientContr(int contribution) {
+    public PatientContr(BigDecimal contribution) {
         Objects.requireNonNull(contribution, "The contribution cannot be NULL");
 
-        this.contribution = new BigDecimal(contribution);
+        this.contribution = contribution;
     }
+
 
     public BigDecimal getContribution() { return contribution; }
 

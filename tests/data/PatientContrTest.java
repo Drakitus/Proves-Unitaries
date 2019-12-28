@@ -1,18 +1,24 @@
 package data;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductIDTest implements dataTest{
+public class PatientContrTest implements dataTest {
 
-    ProductID productID;
+    BigDecimal contribution;
+    PatientContr pcontr;
+
     @BeforeEach
     public void setUp(){
-        productID = new ProductID("123456789012");
+        contribution = new BigDecimal(123.456);
+        pcontr = new PatientContr(contribution);
     }
 
     @Test
@@ -43,10 +49,10 @@ public class ProductIDTest implements dataTest{
                 });
         assertEquals("ProductID cannot be WhiteSpaces", exception.getMessage());
     }
-    @Test
-    @DisplayName("Creació d'un ProductID correcte")
-    public void addCorrectDataTest() {
-        assertEquals(new ProductID("123456789012"), productID);
-    }
 
+    @Test
+    @DisplayName("Creació d'un ProductID amb dades correctes")
+    public void addCorrectDataTest() {
+        assertEquals(new PatientContr(contribution), pcontr);
+    }
 }

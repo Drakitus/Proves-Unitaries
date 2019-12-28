@@ -11,12 +11,33 @@ final public class HealthCardID {
 
         if (code.isEmpty()) throw new IllegalArgumentException("HealthCardID cannot be Empty");
         if (code.isBlank()) throw new IllegalArgumentException("HealthCardID cannot be WhiteSpaces");
-        if (!isValidHealthCardID(code)) throw new IllegalArgumentException("HealthCardID has to be a String of numbers");
+        if(!codeIsValid(code)) throw new IllegalArgumentException("HealthCardID is not valid.");
         
         this.personalID = code;
     }
-    private Boolean isValidHealthCardID(String personalID){return personalID.matches("[0-9]+");}
     public String getPersonalID() { return personalID; }
+
+    private boolean codeIsValid(String code){
+        return code.length() == 16 && first4Letters(code) && last12digits(code);
+    }
+
+    private boolean first4Letters(String code){
+        char [] alphabet = new char[4];
+        code.getChars(0,4, alphabet, 0);
+        for(int i = 0; i < 4; i++){
+            if (!Character.isAlphabetic(alphabet[i])) return false;
+        }
+        return true;
+    }
+
+    private boolean last12digits(String code){
+        char [] digit = new char[12];
+        code.getChars(4,16, digit, 0);
+        for(int i = 0; i < 12; i++){
+            if (!Character.isDigit(digit[i])) return false;
+        }
+        return true;
+    }
 
     @Override
     public boolean equals(Object o) {
