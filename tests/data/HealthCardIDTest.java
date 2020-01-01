@@ -13,6 +13,7 @@ class HealthCardIDTest {
     public static void setUp(){
         hc = new HealthCardID("ABCD123456789012");
     }
+    
     @Test
     @DisplayName("No accepta null")
     public void NullThrowsExceptionTest(){
