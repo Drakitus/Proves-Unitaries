@@ -1,13 +1,11 @@
 package pharmacy;
 
-import data.ProductID;
-
 public class MedicineDispensingLine {
 
     private boolean acquired;
-    ProductID productID;
+    ProductSaleLine productID;
 
-    public MedicineDispensingLine(ProductID productID, boolean acquired){
+    public MedicineDispensingLine(ProductSaleLine productID, boolean acquired){
         this.acquired = acquired;
         this.productID = productID;
     }

@@ -17,7 +17,6 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> partial;
 
-
     public Sale (int saleCode, Date date) {
         this.saleCode = saleCode;
         this.date = date;
@@ -30,13 +29,13 @@ public class Sale {
         if(isClosed){
             throw new SaleClosedException("The sale is closed");
         }
-        ProductSaleLine line = new ProductSaleLine(prodID,price,contr);
-        partial.add(line);
+        ProductSaleLine psl = new ProductSaleLine(prodID,price,contr);
+        partial.add(psl);
     }
 
     private void calculateAmount() {
-        for(ProductSaleLine line : partial){
-            amount = amount.add(line.getPrice());
+        for(ProductSaleLine psl : partial){
+            amount = amount.add(psl.getPrice());
         }
     }
 
@@ -44,10 +43,10 @@ public class Sale {
         if(isClosed){
             throw new SaleClosedException("The sale is closed");
         }
-        amount = amount.multiply(new BigDecimal(1.21)); //review
+        amount = amount.multiply(new BigDecimal(1.21));
     }
 
-    public void calculateFinalAmount() throws SaleClosedException {
+    public void calculateFinalAmount() throws SaleClosedException { //Review
         if (isClosed){
             throw new SaleClosedException("The sale is closed");
         }
@@ -55,9 +54,17 @@ public class Sale {
         addTaxes();
     }
 
+    public int getSaleCode() { return saleCode; }
+
+    public void setSaleCode(int saleCode) { this.saleCode = saleCode; }
+
+    public Date getDate() { return date; }
+
+    public void setDate(Date date) { this.date = date; }
+
     public BigDecimal getAmount() { return amount; }
 
-    private void setClosed() { isClosed = true; }
+    private void setClosed() { this.isClosed = true; }
 
     public boolean isClosed() { return isClosed; }
 

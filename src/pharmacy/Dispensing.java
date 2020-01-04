@@ -17,7 +17,8 @@ public class Dispensing {
     public Dispensing(Date initDate, Date finalDate) {
         this.initDate = initDate;
         this.finalDate = finalDate;
-        this.todayDate = todayDate;
+        this.todayDate = new Date();
+        this.isCompleted = false;
     }
     public boolean dispensingEnabled() throws DispensingNotAvailableException{
         if (todayDate.after(initDate) && todayDate.before(finalDate)){
@@ -26,13 +27,18 @@ public class Dispensing {
             throw new DispensingNotAvailableException("The dispensing period is not correct");
         }
     }
-    public void setProductAsDispensed(ProductID prodID) {
+    public void setProductAsDispensed(ProductSaleLine prodID) {
         if (prodID == mdl.productID){
             mdl.setAcquired(true);
         }
     }
-    public void setCompleted() {
-        isCompleted = true;
-    }
+
+    public boolean isCompleted() { return isCompleted; }
+
+    public void setCompleted(boolean isCompleted) { this.isCompleted = isCompleted; }
+
+    public byte getnOrder() { return nOrder; }
+
+    public void setnOrder(byte nOrder) { this.nOrder = nOrder; }
   // the rest of getters and setters ???
 }

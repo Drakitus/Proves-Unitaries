@@ -1,24 +1,23 @@
 package pharmacy;
 
-import data.ProductID;
-
 import java.math.BigDecimal;
 
 public class ProductSpecification {
 
-    private ProductID UPCcode;
+
+    private ProductSaleLine prodID;
     private String description;
     private BigDecimal price;
 
-    public ProductSpecification(ProductID UPCcode, String description, BigDecimal price) {
-        this.UPCcode = UPCcode;
+    public ProductSpecification(ProductSaleLine prodID, String description, BigDecimal price) {
+        this.prodID = prodID;
         this.description = description;
         this.price = price;
     }
 
+    public ProductSaleLine getProdID() { return prodID; }
 
-    public ProductID getUPCcode() { return UPCcode; }
-    public void setUPCcode(ProductID UPCcode) { this.UPCcode = UPCcode; }
+    public void setProdID(ProductSaleLine prodID) { this.prodID = prodID; }
 
     public String getDescription(){
         return description;
