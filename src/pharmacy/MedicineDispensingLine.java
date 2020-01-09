@@ -1,11 +1,14 @@
 package pharmacy;
 
+import data.ProductID;
+
 public class MedicineDispensingLine {
 
     private boolean acquired;
-    ProductSaleLine productID;
+    private ProductID productID;
 
-    public MedicineDispensingLine(ProductSaleLine productID, boolean acquired){
+
+    public MedicineDispensingLine(ProductID productID, boolean acquired){
         this.acquired = acquired;
         this.productID = productID;
     }
@@ -14,7 +17,11 @@ public class MedicineDispensingLine {
         return acquired;
     }
 
-    public void setAcquired(boolean acquired) {
-        this.acquired = acquired;
+    public void setAcquired(ProductID productID) {
+        this.acquired = true;
+    }
+
+    public ProductID getMedicine(){
+        return productID; // id medicament
     }
 }

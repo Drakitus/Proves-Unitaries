@@ -25,11 +25,12 @@ public class Sale {
         this.partial = new ArrayList<>();
     } // Assigns the current date, a code to the sale, etc.
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr)throws SaleClosedException {
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if(isClosed){
             throw new SaleClosedException("The sale is closed");
         }
         ProductSaleLine psl = new ProductSaleLine(prodID,price,contr);
+        psl.getPrice();
         partial.add(psl);
     }
 
@@ -63,6 +64,8 @@ public class Sale {
     public void setDate(Date date) { this.date = date; }
 
     public BigDecimal getAmount() { return amount; }
+
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
 
     private void setClosed() { this.isClosed = true; }
 
