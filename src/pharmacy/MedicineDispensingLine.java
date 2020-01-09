@@ -8,8 +8,8 @@ public class MedicineDispensingLine {
     private ProductID productID;
 
 
-    public MedicineDispensingLine(ProductID productID, boolean acquired){
-        this.acquired = acquired;
+    public MedicineDispensingLine(ProductID productID){
+        this.acquired = false;
         this.productID = productID;
     }
 

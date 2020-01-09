@@ -11,31 +11,47 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductSpecificationTest {
 
-    ProductSpecification ps;
-    BigDecimal price;
-    ProductID prodUPC;
+    private ProductSpecification ps;
+    private BigDecimal price;
+    private ProductID prodID;
+    private String descr;
 
     @BeforeEach
     public void setUp(){
         price = new BigDecimal(5);
-        prodUPC = new ProductID("000123456789");
-        ps = new ProductSpecification(prodUPC,"cure tot", price);
+        prodID = new ProductID("000123456789");
+        descr = "Ayuda a aliviar los síntomas de la gripe y el resfriado";
+        ps = new ProductSpecification(prodID,descr, price);
     }
 
     @Test
-    @DisplayName("Comprovar que la especificació és correcta")
-    public void CorrectProductSpecification(){
-        assertEquals(new ProductSpecification(prodUPC,"cure tot", price),ps);
+    @DisplayName("Obtindre la descripció")
+    public void GetDescriptionTest(){
+        String descripcio = "Ayuda a aliviar los síntomas de la gripe y el resfriado";
+        assertEquals(descripcio,ps.getDescription());
     }
+
     @Test
-    @DisplayName("Comprovar que es la mateixa descripció")
-    public void SameDescriptionTest(){
-        assertEquals("cure tot",ps.getDescription());
+    @DisplayName("Crear nova descripció")
+    public void SetDescriptionTest(){
+        String descripcio = "Contiene ibuprofeno como principio activo";
+        ps.setDescription("Contiene ibuprofeno como principio activo");
+        assertEquals(descripcio,ps.getDescription());
     }
+
     @Test
-    @DisplayName("Comprovar que es el mateix preu")
-    public void SamePrice(){
-        assertEquals(new BigDecimal(5),ps.getPrice());
+    @DisplayName("Obtindre el preu")
+    public void GetPriceTest(){
+        BigDecimal price = new BigDecimal(5);
+        assertEquals(price,ps.getPrice());
+    }
+
+    @Test
+    @DisplayName("Ficar nou preu")
+    public void SetPriceTest(){
+        BigDecimal price = new BigDecimal(9.6);
+        ps.setPrice(new BigDecimal(9.6));
+        assertEquals(price,ps.getPrice());
     }
 
 }
