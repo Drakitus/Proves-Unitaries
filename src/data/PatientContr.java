@@ -14,7 +14,12 @@ public class PatientContr {
     }
 
 
-    public BigDecimal getContribution() { return contribution; }
+    public BigDecimal getPatientContribution() throws Exception {
+        if(contribution.compareTo( new BigDecimal(0.0)) < 0 || contribution.compareTo(new BigDecimal(100.0)) > 0){
+            throw new Exception("ERROR. The contribution must be between 0.0 and 100.0");
+        }
+        return contribution;
+    }
 
     @Override
     public boolean equals(Object o) {
