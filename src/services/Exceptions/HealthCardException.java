@@ -1,4 +1,4 @@
-package services;
+package services.Exceptions;
 
 public class HealthCardException extends Exception {
 }
