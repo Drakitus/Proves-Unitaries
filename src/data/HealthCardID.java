@@ -11,14 +11,14 @@ final public class HealthCardID {
 
         if (code.isEmpty()) throw new IllegalArgumentException("HealthCardID cannot be Empty");
         if (code.isBlank()) throw new IllegalArgumentException("HealthCardID cannot be WhiteSpaces");
-        if(!codeIsValid(code)) throw new IllegalArgumentException("HealthCardID is not valid.");
+        if(!codeIsValid()) throw new IllegalArgumentException("HealthCardID is not valid.");
         
         this.personalID = code;
     }
     public String getPersonalID() { return personalID; }
 
-    private boolean codeIsValid(String code){
-        return code.length() == 14 && first4Letters(code) && last12digits(code);
+    public boolean codeIsValid(){
+        return personalID.length() == 14 && first4Letters(personalID) && last10digits(personalID);
     }
 
     private boolean first4Letters(String code){
@@ -30,7 +30,7 @@ final public class HealthCardID {
         return true;
     }
 
-    private boolean last12digits(String code){
+    private boolean last10digits(String code){
         char [] digit = new char[10];
         code.getChars(4,14, digit, 0);
         for(int i = 0; i < 10; i++){
