@@ -1,5 +1,7 @@
 package data;
 
+import data.Exceptions.PatientContrException;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -14,9 +16,9 @@ public class PatientContr {
     }
 
 
-    public BigDecimal getPatientContribution() throws Exception {
+    public BigDecimal getPatientContribution() throws PatientContrException {
         if(contribution.compareTo( new BigDecimal(0.0)) < 0 || contribution.compareTo(new BigDecimal(100.0)) > 0){
-            throw new Exception("ERROR. The contribution must be between 0.0 and 100.0");
+            throw new PatientContrException("ERROR. The contribution must be between 0.0 and 100.0");
         }
         return contribution;
     }
