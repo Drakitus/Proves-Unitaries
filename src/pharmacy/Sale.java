@@ -1,5 +1,6 @@
 package pharmacy;
 
+import data.Exceptions.PatientContrException;
 import data.PatientContr;
 import data.ProductID;
 import pharmacy.Exceptions.SaleClosedException;
@@ -37,7 +38,7 @@ public class Sale {
         partial.add(psl);
     }
 
-    private void calculateAmount() throws Exception {
+    private void calculateAmount() throws PatientContrException {
         for(ProductSaleLine psl : partial){
             amount = amount.add(psl.getSubTotal());
         }
@@ -50,7 +51,7 @@ public class Sale {
         amount = amount.multiply(BigDecimal.valueOf(1.21));
     }
 
-    public void calculateFinalAmount() throws Exception {
+    public void calculateFinalAmount() throws SaleClosedException, PatientContrException {
         if (isClosed){
             throw new SaleClosedException("The sale is closed");
         }
@@ -58,19 +59,14 @@ public class Sale {
         addTaxes();
     }
 
-    public BigDecimal getAmount() { return amount; }
+    public BigDecimal getAmount() throws SaleClosedException, PatientContrException {
+        calculateFinalAmount();
+        return amount;
+    }
 
     public boolean isClosed() { return isClosed; }
 
     public void setClosed(){ this.isClosed = true;}
-
-    public int getSaleCode() { return saleCode; }
-
-    public Date getDate() { return date; }
-
-    public ProductSaleLine getProductSaleLine() { return this.psl; }
-
-    public Dispensing getDispensing() { return disp; }
 
     public void setDispensing(Dispensing disp) { this.disp = disp; }
 
