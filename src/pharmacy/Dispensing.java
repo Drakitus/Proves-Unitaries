@@ -1,6 +1,7 @@
 package pharmacy;
 
 import data.ProductID;
+import pharmacy.Exceptions.DispensingNotAvailableException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,16 +12,15 @@ public class Dispensing {
     private byte nOrder; // n. of order for this dispensing inside the treatment.
     private Date initDate, finalDate; // The period.
     private boolean isCompleted;
-    private Date todayDate;
     List<MedicineDispensingLine> presc; //Medicines to dispense and control.
 
     public Dispensing() {
-        this.todayDate = new Date();
         this.isCompleted = false;
         this.presc = new ArrayList<>();
     }
-    public boolean dispensingEnabled() throws DispensingNotAvailableException{
-        if (todayDate.after(initDate) && todayDate.before(finalDate)){
+    public boolean dispensingEnabled() throws DispensingNotAvailableException {
+        Date todayDate = new Date();
+        if (todayDate.after(initDate)){
             return true;
         }else {
             throw new DispensingNotAvailableException("The dispensing period is not correct");
@@ -50,13 +50,21 @@ public class Dispensing {
 
     public void setFinalDate(Date finalDate) { this.finalDate = finalDate; }
 
-    public Date getTodayDate() { return todayDate; }
-
-    public void setTodayDate(Date todayDate) { this.todayDate = todayDate; }
-
     public List<MedicineDispensingLine> getPresc() { return presc; }
 
     public void setPresc(List<MedicineDispensingLine> presc) { this.presc = presc; }
+
+    public void addLine(MedicineDispensingLine line){
+        presc.add(line);
+    }
+    public MedicineDispensingLine getLine(ProductID productID){
+        for(MedicineDispensingLine line : presc){
+            if(line.getMedicine().equals(productID)){
+                return line;
+            }
+        }
+        return null;
+    }
 
   // the rest of getters and setters ???
 }
