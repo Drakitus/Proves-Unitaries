@@ -2,6 +2,7 @@ package pharmacy;
 
 import data.PatientContr;
 import data.ProductID;
+import pharmacy.Exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,9 +18,12 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> partial;
 
-    public Sale (int saleCode, Date date) {
+    private ProductSaleLine psl;
+    private Dispensing disp;
+
+    public Sale (int saleCode) {
         this.saleCode = saleCode;
-        this.date = date;
+        this.date = new Date();
         this.amount = new BigDecimal(0);
         this.isClosed = false;
         this.partial = new ArrayList<>();
@@ -29,14 +33,13 @@ public class Sale {
         if(isClosed){
             throw new SaleClosedException("The sale is closed");
         }
-        ProductSaleLine psl = new ProductSaleLine(prodID,price,contr);
-        psl.getPrice();
+        psl = new ProductSaleLine(prodID,price,contr);
         partial.add(psl);
     }
 
-    private void calculateAmount() {
+    private void calculateAmount() throws Exception {
         for(ProductSaleLine psl : partial){
-            amount = amount.add(psl.getPrice());
+            amount = amount.add(psl.getSubTotal());
         }
     }
 
@@ -44,10 +47,10 @@ public class Sale {
         if(isClosed){
             throw new SaleClosedException("The sale is closed");
         }
-        amount = amount.multiply(new BigDecimal(1.21));
+        amount = amount.multiply(BigDecimal.valueOf(1.21));
     }
 
-    public void calculateFinalAmount() throws SaleClosedException { //Review
+    public void calculateFinalAmount() throws Exception {
         if (isClosed){
             throw new SaleClosedException("The sale is closed");
         }
@@ -55,20 +58,20 @@ public class Sale {
         addTaxes();
     }
 
-    public int getSaleCode() { return saleCode; }
+    public BigDecimal getAmount() { return amount; }
 
-    public void setSaleCode(int saleCode) { this.saleCode = saleCode; }
+    public boolean isClosed() { return isClosed; }
+
+    public void setClosed(){ this.isClosed = true;}
+
+    public int getSaleCode() { return saleCode; }
 
     public Date getDate() { return date; }
 
-    public void setDate(Date date) { this.date = date; }
+    public ProductSaleLine getProductSaleLine() { return this.psl; }
 
-    public BigDecimal getAmount() { return amount; }
+    public Dispensing getDispensing() { return disp; }
 
-    public void setAmount(BigDecimal amount) { this.amount = amount; }
-
-    private void setClosed() { this.isClosed = true; }
-
-    public boolean isClosed() { return isClosed; }
+    public void setDispensing(Dispensing disp) { this.disp = disp; }
 
 }
