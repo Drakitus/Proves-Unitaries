@@ -30,8 +30,8 @@ final public class ProductID {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductID party1 = (ProductID) o;
-        return prodUPC.equals(party1.prodUPC);
+        ProductID productID = (ProductID) o;
+        return prodUPC.equals(productID.prodUPC);
     }
     @Override
     public int hashCode() { return prodUPC.hashCode(); }
