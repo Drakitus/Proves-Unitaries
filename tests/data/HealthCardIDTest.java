@@ -11,7 +11,7 @@ class HealthCardIDTest {
     private static HealthCardID hc;
     @BeforeAll
     public static void setUp(){
-        hc = new HealthCardID("ABCD123456789012");
+        hc = new HealthCardID("ABCD1234567890");
     }
     
     @Test
@@ -45,7 +45,7 @@ class HealthCardIDTest {
     @Test
     @DisplayName("Correcta HealthCardID del pacient")
     public void CorrectHealthCardTest(){
-        assertEquals(new HealthCardID("ABCD123456789012"),hc);
+        assertEquals(new HealthCardID("ABCD1234567890"),hc);
     }
 
 }

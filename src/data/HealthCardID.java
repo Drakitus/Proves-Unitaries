@@ -18,7 +18,7 @@ final public class HealthCardID {
     public String getPersonalID() { return personalID; }
 
     private boolean codeIsValid(String code){
-        return code.length() == 16 && first4Letters(code) && last12digits(code);
+        return code.length() == 14 && first4Letters(code) && last12digits(code);
     }
 
     private boolean first4Letters(String code){
@@ -31,9 +31,9 @@ final public class HealthCardID {
     }
 
     private boolean last12digits(String code){
-        char [] digit = new char[12];
-        code.getChars(4,16, digit, 0);
-        for(int i = 0; i < 12; i++){
+        char [] digit = new char[10];
+        code.getChars(4,14, digit, 0);
+        for(int i = 0; i < 10; i++){
             if (!Character.isDigit(digit[i])) return false;
         }
         return true;
