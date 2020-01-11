@@ -1,5 +1,6 @@
 package pharmacy;
 
+import data.Exceptions.PatientContrException;
 import data.PatientContr;
 import data.ProductID;
 
@@ -11,14 +12,10 @@ public class ProductSaleLine {
     private BigDecimal price;
     private PatientContr contr;
 
-    ProductSpecification ps;
-    private BigDecimal subTotal;
-
     ProductSaleLine(ProductID prodID, BigDecimal price, PatientContr contr) {
         this.prodID = prodID;
         this.price = price;
         this.contr = contr;
-        this.subTotal = new BigDecimal(0);
     }
 
     public ProductID getProdID() { return prodID; }
@@ -33,8 +30,7 @@ public class ProductSaleLine {
 
     public void setContr(PatientContr contr) { this.contr = contr; }
 
-    public BigDecimal getSubTotal() { return subTotal; }
-
-    public void setSubTotal(BigDecimal subTotal) { this.subTotal = ps.getPrice().multiply(contr.getContribution()); }
-
+    public BigDecimal getSubTotal() throws PatientContrException {
+        return price.multiply(contr.getPatientContribution());
+    }
 }
