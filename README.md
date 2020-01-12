@@ -6,7 +6,7 @@ Data entrega: 12/01/2018
 
 ### Authors ###
 * [Marc Masip](https://github.com/Drakitus)
-* [Jorge Nueno]
+* [Jorge Nueno](https://github.com/jorgics)
 ### Tasks ###
   * Package Data
     * - [X] HealthCardID
@@ -19,15 +19,15 @@ Data entrega: 12/01/2018
     * - [X] NationalHealthService
     * - [X] HealthCardReader
   * Package Pharmacy
-    * - [] Sale
-      * - [] Test
-    * - [] Dispensing
-      * - [] Test
-    * - [] DispensingTerminal
-      * - [] Test
-    * - [] ProductSaleLine
-      * - [] Test
+    * - [X] Sale
+      * - [X] Test
+    * - [X] Dispensing
+      * - [X] Test
+    * - [X] DispensingTerminal
+      * - [X] Test
+    * - [X] ProductSaleLine
+      * - [X] Test
     * - [X] ProductSpecification
-      * - [] Test
+      * - [X] Test
     * - [X] MedicineDispensingLine
       * - [X] Test
