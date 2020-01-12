@@ -58,9 +58,8 @@ public class DispensingTerminalTest {
 
         dt.getePrescription();
         dt.initNewSale(5);
-        Sale sale = new Sale(5);
 
-        assertEquals(sale.isClosed(),dt.getSale().isClosed());
+        assertFalse(dt.getSale().isClosed());
     }
 
    @Test
