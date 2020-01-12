@@ -23,7 +23,7 @@ public class SNSDoubleTest implements NationalHealthService {
         byte nOrder = 13;
         List<MedicineDispensingLine> prescrition = new ArrayList<>();
         prescrition.add(new MedicineDispensingLine(new ProductID("123456789012")));
-        Dispensing dispensing = new Dispensing(nOrder, new Date(115, 1, 1), new Date(125, 1,1));
+        Dispensing dispensing = new Dispensing(nOrder, new Date(115, 1, 1), new Date(125, 1,1),prescrition);
         return dispensing;
     }
 

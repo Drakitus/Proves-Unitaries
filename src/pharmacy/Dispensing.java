@@ -15,6 +15,7 @@ public class Dispensing {
     private Date todayDate;
     List<MedicineDispensingLine> presc; //Medicines to dispense and control.
 
+    //Constructor utilizado en la clase DispensingTest
     public Dispensing(byte nOrder, Date initDate, Date finalDate) {
         this.nOrder = nOrder;
         this.isCompleted = false;
@@ -23,9 +24,18 @@ public class Dispensing {
         this.initDate = initDate;
         this.finalDate = finalDate;
     }
+    //Constructor  utilizado en la clase DispensingTerminal
+    public Dispensing(byte nOrder, Date initDate, Date finalDate, List<MedicineDispensingLine> presc){
+        this.nOrder = nOrder;
+        this.isCompleted = false;
+        this.presc = presc;
+        this.todayDate = new Date();
+        this.initDate = initDate;
+        this.finalDate = finalDate;
+    }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException {
-        if (todayDate.after(initDate) && todayDate.before(finalDate)){
+        if (initDate.after(todayDate) && finalDate.before(todayDate)){
             throw new DispensingNotAvailableException("The dispensing period is not correct");
         }else {
             return true;
