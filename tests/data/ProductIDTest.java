@@ -46,7 +46,8 @@ public class ProductIDTest implements dataTest{
     @Test
     @DisplayName("Creació d'un ProductID correcte")
     public void addCorrectDataTest() {
-        assertEquals(new ProductID("123456789012"), productID);
+        String pID = productID.getProdUPC();
+        assertEquals("123456789012",pID);
     }
 
 }

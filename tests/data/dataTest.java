@@ -1,5 +1,6 @@
 package data;
 
+import data.Exceptions.PatientContrException;
 import org.junit.jupiter.api.Test;
 
 public interface dataTest {
@@ -13,5 +14,5 @@ public interface dataTest {
     void AllWhiteSpacesThrowsExceptionTest();
 
     @Test
-    void addCorrectDataTest();
+    void addCorrectDataTest() throws PatientContrException;
 }

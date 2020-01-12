@@ -1,5 +1,6 @@
 package data;
 
+import data.Exceptions.PatientContrException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ public class PatientContrTest implements dataTest {
 
     @BeforeEach
     public void setUp(){
-        contribution = new BigDecimal(123.456);
+        contribution = new BigDecimal(10);
         pcontr = new PatientContr(contribution);
     }
 
@@ -52,7 +53,8 @@ public class PatientContrTest implements dataTest {
 
     @Test
     @DisplayName("Creació d'un ProductID amb dades correctes")
-    public void addCorrectDataTest() {
-        assertEquals(new PatientContr(contribution), pcontr);
+    public void addCorrectDataTest() throws PatientContrException {
+        BigDecimal pcont = pcontr.getPatientContribution();
+        assertEquals(new BigDecimal(10), pcont);
     }
 }

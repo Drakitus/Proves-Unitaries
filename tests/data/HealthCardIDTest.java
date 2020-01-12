@@ -45,7 +45,8 @@ class HealthCardIDTest {
     @Test
     @DisplayName("Correcta HealthCardID del pacient")
     public void CorrectHealthCardTest(){
-        assertEquals(new HealthCardID("ABCD1234567890"),hc);
+        String hc2 = hc.getPersonalID();
+        assertEquals("ABCD1234567890",hc2);
     }
 
 }
