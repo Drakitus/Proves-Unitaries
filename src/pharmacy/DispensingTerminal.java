@@ -1,5 +1,6 @@
 package pharmacy;
 
+import data.Exceptions.PatientContrException;
 import data.HealthCardID;
 import data.PatientContr;
 import data.ProductID;
@@ -10,8 +11,8 @@ import services.Exceptions.HealthCardException;
 import services.Exceptions.NotValidePrescriptionException;
 import services.Exceptions.ProductIDException;
 
+import java.math.BigDecimal;
 import java.net.ConnectException;
-import java.util.Date;
 import java.util.List;
 
 public class DispensingTerminal implements NationalHealthService{
@@ -21,25 +22,17 @@ public class DispensingTerminal implements NationalHealthService{
     private NationalHealthService sns;
     private Dispensing disp;            //actual dispensing
     private Sale sale;
+    private BigDecimal amount;
 
     public DispensingTerminal(){
-        this.hc = null;
-        this.hcr = null;
-        this.sns = null;
-        this.disp = null;
     }
-    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, DispensingNotAvailableException {
+
+    public void getePrescription() throws HealthCardException, NotValidePrescriptionException, ConnectException, DispensingNotAvailableException {
        try {
             hc = hcr.getHealthCardID();
             disp = sns.getePrescription(hc);
        }catch (ConnectException ce){
            throw new ConnectException();
-       }
-       if(!hc.codeIsValid()){
-            throw new HealthCardException();
-       }
-       if (!disp.dispensingEnabled()){
-            throw new DispensingNotAvailableException("The dispensation is not available");
        }
     }
     public void initNewSale(int saleCode) throws DispensingNotAvailableException {
@@ -52,21 +45,36 @@ public class DispensingTerminal implements NationalHealthService{
     }
     public void enterProduct(ProductID pID) throws ConnectException, SaleClosedException {
         try {
-            ProductSpecification prodSpec = new ProductSpecification(pID,null, null);
+            ProductSpecification prodSpec = sns.getProductSpecific(pID);
             PatientContr patCont = sns.getPatientContr(hc);
 
             sale.addLine(pID,prodSpec.getPrice(),patCont);
             disp.setProductAsDispensed(pID);
-        }catch (ConnectException ce){
+        }catch (ConnectException | ProductIDException ce){
             throw new ConnectException();
         }
     }
-    public void finalizeSale() throws Exception {
-        sale.calculateFinalAmount();
-        sale.getAmount();
+    public void finalizeSale() throws SaleClosedException, PatientContrException {
+        //sale.calculateFinalAmount();
+        amount =  sale.getAmount();
         sale.setClosed();
         disp.setCompleted();
     }
+
+    public Dispensing getActDispensing(){ return disp; }
+
+    public Sale getSale(){
+        return sale;
+    }
+
+    public void setSNS(NationalHealthService sns){ this.sns = sns;}
+
+    public void setHCR(HealthCardReader hcr){ this.hcr = hcr; }
+
+    public BigDecimal getAmount() { return amount; }
+
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
+
 
     @Override
     public Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
