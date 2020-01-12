@@ -63,22 +63,23 @@ public class DispensingTerminalTest {
         assertEquals(sale.isClosed(),dt.getSale().isClosed());
     }
 
-   /* @Test
+   @Test
     public void enterProductTest() throws HealthCardException, ConnectException, DispensingNotAvailableException, SaleClosedException, NotValidePrescriptionException {
-        dt.getePrescription("A".charAt(0));
+        dt.getePrescription();
         dt.initNewSale(5);
         dt.enterProduct(new ProductID("123456789012"));
 
-        List<ProductSaleLine> productSaleLines = dt.getSale().getProductSaleLine();
+        List<ProductSaleLine> productSaleLines = dt.getSale().getPartial();
         assertEquals(new ProductID("123456789012"), productSaleLines.get(productSaleLines.size()-1).getProdID());
         assertTrue(dt.getActDispensing().getisAcquired(new ProductID("123456789012")));
-    }*/
+    }
+
     @Test
     public void finalizeSaleTest() throws HealthCardException, ConnectException, DispensingNotAvailableException,
                                         SaleClosedException, NotValidePrescriptionException, PatientContrException {
         dt.getePrescription();
         dt.initNewSale(5);
-        dt.enterProduct(new ProductID("1234567890"));
+        dt.enterProduct(new ProductID("123456789012"));
         dt.finalizeSale();
         assertTrue(dt.getSale().isClosed());
         assertTrue(dt.getActDispensing().isCompleted());

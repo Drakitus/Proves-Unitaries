@@ -55,8 +55,8 @@ public class DispensingTerminal implements NationalHealthService{
         }
     }
     public void finalizeSale() throws SaleClosedException, PatientContrException {
-        //sale.calculateFinalAmount();
-        amount =  sale.getAmount();
+        sale.calculateFinalAmount();
+        amount = sale.getAmount();
         sale.setClosed();
         disp.setCompleted();
     }

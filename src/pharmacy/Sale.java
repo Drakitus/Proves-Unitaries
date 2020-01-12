@@ -74,4 +74,7 @@ public class Sale {
 
     public ProductSaleLine getProductSaleLine(){ return psl;}
 
+    public List<ProductSaleLine> getPartial() {
+        return partial;
+    }
 }
