@@ -28,7 +28,6 @@ public class DispensingTerminal implements NationalHealthService{
         this.sns = null;
         this.disp = null;
     }
-
     public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, DispensingNotAvailableException {
        try {
             hc = hcr.getHealthCardID();
@@ -73,17 +72,14 @@ public class DispensingTerminal implements NationalHealthService{
     public Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
         return null;
     }
-
     @Override
     public PatientContr getPatientContr(HealthCardID hcID) throws ConnectException {
         return null;
     }
-
     @Override
     public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
         return null;
     }
-
     @Override
     public List<Dispensing> updateePrescription(HealthCardID hcID, Dispensing disp) throws ConnectException {
         return null;

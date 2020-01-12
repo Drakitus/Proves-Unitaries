@@ -2,7 +2,6 @@ package pharmacy;
 
 import data.ProductID;
 import pharmacy.Exceptions.DispensingNotAvailableException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,22 +9,28 @@ import java.util.List;
 public class Dispensing {
 
     private byte nOrder; // n. of order for this dispensing inside the treatment.
-    private Date initDate, finalDate; // The period.
     private boolean isCompleted;
+    private Date initDate, finalDate;
+    private Date todayDate;
     List<MedicineDispensingLine> presc; //Medicines to dispense and control.
 
-    public Dispensing() {
+    public Dispensing(byte nOrder, Date initDate, Date finalDate) {
+        this.nOrder = nOrder;
         this.isCompleted = false;
         this.presc = new ArrayList<>();
+        this.todayDate = new Date();
+        this.initDate = initDate;
+        this.finalDate = finalDate;
     }
+
     public boolean dispensingEnabled() throws DispensingNotAvailableException {
-        Date todayDate = new Date();
-        if (todayDate.after(initDate)){
-            return true;
-        }else {
+        if (todayDate.after(initDate) && todayDate.before(finalDate)){
             throw new DispensingNotAvailableException("The dispensing period is not correct");
+        }else {
+            return true;
         }
     }
+
     public void setProductAsDispensed(ProductID prodID) {
         for (MedicineDispensingLine medicineLine : presc){
             if(medicineLine.getMedicine().equals(prodID)){
@@ -42,6 +47,8 @@ public class Dispensing {
 
     public void setnOrder(byte nOrder) { this.nOrder = nOrder; }
 
+    public Date getTodayDate() { return todayDate; }
+
     public Date getInitDate() { return initDate; }
 
     public void setInitDate(Date initDate) { this.initDate = initDate; }
@@ -57,6 +64,7 @@ public class Dispensing {
     public void addLine(MedicineDispensingLine line){
         presc.add(line);
     }
+
     public MedicineDispensingLine getLine(ProductID productID){
         for(MedicineDispensingLine line : presc){
             if(line.getMedicine().equals(productID)){
@@ -65,6 +73,5 @@ public class Dispensing {
         }
         return null;
     }
-
-  // the rest of getters and setters ???
+    // the rest of getters and setters ???
 }
