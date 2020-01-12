@@ -4,6 +4,7 @@ import data.ProductID;
 import pharmacy.Exceptions.DispensingNotAvailableException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Dispensing {
@@ -43,6 +44,18 @@ public class Dispensing {
 
     public void setCompleted() { this.isCompleted = true; }
 
+    public boolean getisAcquired(ProductID productID) {
+        Iterator<MedicineDispensingLine> it = presc.iterator();
+        while (it.hasNext()){
+            MedicineDispensingLine medicineLine = it.next();
+            if(medicineLine.getMedicine().equals(productID)){
+                return medicineLine.isAcquired();
+            }
+        }
+        return false;
+
+    }
+
     public byte getnOrder() { return nOrder; }
 
     public void setnOrder(byte nOrder) { this.nOrder = nOrder; }
@@ -73,5 +86,4 @@ public class Dispensing {
         }
         return null;
     }
-    // the rest of getters and setters ???
 }

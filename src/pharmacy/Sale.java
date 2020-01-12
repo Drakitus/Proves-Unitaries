@@ -68,6 +68,10 @@ public class Sale {
 
     public void setClosed(){ this.isClosed = true;}
 
+    public Dispensing getDispensing(){ return disp;}
+
     public void setDispensing(Dispensing disp) { this.disp = disp; }
+
+    public ProductSaleLine getProductSaleLine(){ return psl;}
 
 }
